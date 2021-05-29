@@ -27,3 +27,7 @@ docker run -ti --rm \
   -p 8080:8080 \
   chadiem/edenred-tickets-restaurant
 ```
+
+### Access data
+
+Data can be accessed at http://localhost:8080/tr
