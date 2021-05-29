@@ -24,5 +24,6 @@ docker run -ti --rm \
   --env EDENRED_USER=<login@company.com> \
   --env EDENRED_PASS=<pass> \
   --env EDENRED_COOKIE="$(cat path/to/cookie)" \
-  <image>
+  -p 8080:8080 \
+  chadiem/edenred-tickets-restaurant
 ```
