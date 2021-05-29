@@ -1,7 +1,8 @@
 FROM alpine
 
 RUN apk add --no-cache chromium nodejs npm \
-  && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install -g puppeteer --unsafe-perm=true
+  && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install -g puppeteer --unsafe-perm=true \
+  && npm install express winston
 
 ADD *.js ./
 
