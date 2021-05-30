@@ -1,11 +1,16 @@
 # Edenred Tickets Restaurants
 
+A chrome-based tickets restaurant updater (because there's a CAPTCHA to resolve).
+Exposes data on /tr endpoint.
+
 ## How to start
-### Generate initial seed
+### Generate initial cookie seed
 ```
 pip3 install -r requirements.txt
 python3 seed.py
 ```
+
+Login, solve the CAPTCHA, and hit enter. The cookie file will be saved on disk.
 
 ### Start
 
