@@ -80,7 +80,7 @@ async function update() {
     try {
         logger.info('Starting.')
 
-        if (process.env['EDENRED_COOKIE'] != null) {
+        if (process.env['EDENRED_COOKIE'] != null && !fs.existsSync(COOKIES_FILE)) {
             logger.info("Reading provided cookie from env var.");
             fs.writeFile(COOKIES_FILE, process.env['EDENRED_COOKIE'], (err, text) => {
                 if (err) {
