@@ -25,7 +25,7 @@ NODE_PATH='/usr/lib/node_modules' \
 #### Docker
 ```shell
 docker run -ti --rm \
-  --cap-add=SYS_ADMIN \
+  --security-opt seccomp=seccomp/chrome.json \
   --env EDENRED_USER=<login@company.com> \
   --env EDENRED_PASS=<pass> \
   --env EDENRED_COOKIE="$(cat path/to/cookie)" \

@@ -5,7 +5,7 @@ const fs = require('fs');
 const express = require('express')
 const winston = require('winston');
 
-const COOKIES_FILE = process.env['EDENRED_COOKIE_FILE'] != null ? process.env['EDENRED_COOKIE_FILE'] != null : '/tmp/.edenred_cookies'
+const COOKIES_FILE = process.env['EDENRED_COOKIE_FILE'] != null ? process.env['EDENRED_COOKIE_FILE'] : '/tmp/.edenred_cookies'
 const UDPATE_INTERVAL = process.env['EDENRED_UPDATE_INTERVAL'] != null ? process.env['EDENRED_UPDATE_INTERVAL'] : 300000
 const PORT = 8080
 
@@ -19,6 +19,8 @@ const logger = winston.createLogger({
         new winston.transports.Console()
     ],
 });
+
+logger.info('Starting edenred updater - UDPATE_INTERVAL=' + UDPATE_INTERVAL + ', COOKIES_FILE=' + COOKIES_FILE + ', PORT=' + PORT +'.');
 
 const app = express()
 
@@ -78,7 +80,7 @@ async function update() {
     const browser = await puppeteer.launch({ headless: true, slowMo: 25, executablePath: '/usr/bin/chromium-browser' });
 
     try {
-        logger.info('Starting.')
+        logger.info('Begin update.')
 
         if (process.env['EDENRED_COOKIE'] != null && !fs.existsSync(COOKIES_FILE)) {
             logger.info("Reading provided cookie from env var.");
@@ -145,7 +147,7 @@ async function update() {
         trValues['today'] = parseFloat(today.split(' ')[0]);
         trValues['lastUpdated'] = Date.now();
 
-        logger.info('Done.')
+        logger.info('End update.')
     } finally {
         await browser.close();
     }
