@@ -5,8 +5,8 @@ const fs = require('fs');
 const express = require('express')
 const winston = require('winston');
 
-const COOKIES_FILE = '/tmp/.edenred_cookies'
-const UDPATE_INTERVAL = 500000
+const COOKIES_FILE = process.env['EDENRED_COOKIE_FILE'] != null ? process.env['EDENRED_COOKIE_FILE'] != null : '/tmp/.edenred_cookies'
+const UDPATE_INTERVAL = process.env['EDENRED_UPDATE_INTERVAL'] != null ? process.env['EDENRED_UPDATE_INTERVAL'] : 300000
 const PORT = 8080
 
 const logger = winston.createLogger({
