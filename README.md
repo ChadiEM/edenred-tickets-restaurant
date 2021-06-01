@@ -36,3 +36,8 @@ docker run -ti --rm \
 ### Access data
 
 Data can be accessed at http://localhost:8080/tr
+
+## Note to self
+
+### Push a multi-platform build
+`docker buildx build -t "chadiem/edenred-tickets-restaurant" --platform linux/amd64,linux/arm64 --push .`
