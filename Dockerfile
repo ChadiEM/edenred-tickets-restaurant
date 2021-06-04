@@ -1,12 +1,12 @@
 FROM alpine
 
-RUN apk add --no-cache chromium nodejs npm dumb-init \
-  && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install -g puppeteer --unsafe-perm=true \
-  && npm install express winston
+RUN apk add --no-cache chromium nodejs npm dumb-init
+
+COPY package*.json ./
+RUN PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install
 
 RUN mkdir /app
-
-ADD *.js /app
+COPY *.js /app
 
 USER guest
 

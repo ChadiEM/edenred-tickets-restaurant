@@ -49,7 +49,7 @@ process.on('SIGINT', () => {
 })
 
 async function injectCookies(page) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         logger.info("Reading existing cookies.");
         fs.readFile(COOKIES_FILE, async (err, data) => {
             if (!err) {
@@ -66,7 +66,7 @@ async function saveCookies(page) {
     return new Promise((resolve, reject) => {
         let data = JSON.stringify(cookies['cookies']);
         logger.info("Writing cookies.");
-        fs.writeFile(COOKIES_FILE, data, (err, text) => {
+        fs.writeFile(COOKIES_FILE, data, (err) => {
             if (err) {
                 reject(err);
             } else {
@@ -84,7 +84,7 @@ async function update() {
 
         if (process.env['EDENRED_COOKIE'] != null && !fs.existsSync(COOKIES_FILE)) {
             logger.info("Reading provided cookie from env var.");
-            fs.writeFile(COOKIES_FILE, process.env['EDENRED_COOKIE'], (err, text) => {
+            fs.writeFile(COOKIES_FILE, process.env['EDENRED_COOKIE'], (err) => {
                 if (err) {
                     logger.error('Cannot write initial cookie.')
                 }
