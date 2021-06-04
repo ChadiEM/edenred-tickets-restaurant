@@ -30,12 +30,21 @@ let trValues = {
     lastUpdated: 0
 }
 
-app.get("/tr", (req, res) => {
+app.get("/tr", (_req, res) => {
     if (trValues['lastUpdated'] == 0) {
         res.sendStatus(404);
     } else {
         res.status(200).json(trValues);
     }
+});
+
+app.get("/health", (_req, res) => {
+	const healthcheck = {
+        message: "UP",
+		uptime: process.uptime(),
+		timestamp: Date.now()
+	};
+    res.status(200).json(healthcheck);
 });
 
 update();
