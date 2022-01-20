@@ -120,7 +120,7 @@ async function update() {
         // needed because headless mode sends HeadlessChrome
         await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36')
 
-        await page.goto('https://www.myedenred.fr/accueil')
+        await page.goto('https://www.myedenred.fr/carte/')
 
         let isLoggedIn = false
         try {
