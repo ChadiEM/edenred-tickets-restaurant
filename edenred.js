@@ -1,6 +1,6 @@
 // Sorry for the horrible code.
 
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const express = require('express')
 const winston = require('winston');
@@ -86,7 +86,7 @@ async function saveCookies(page) {
 }
 
 async function update() {
-    const browser = await puppeteer.launch({ headless: true, slowMo: 25, executablePath: '/usr/bin/chromium-browser' });
+    const browser = await puppeteer.launch({ headless: true, slowMo: 25, timeout: 300000, executablePath: '/usr/bin/chromium-browser' });
 
     try {
         logger.info('Begin update.')

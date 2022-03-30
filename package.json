@@ -1,14 +1,14 @@
 {
     "name": "edenred-tickets-restaurant",
     "description": "Edenred Tickets Restaurants",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "devDependencies": {
         "eslint": "^7.27.0"
     },
     "dependencies": {
-        "express": "^4.17.1",
-        "puppeteer": "^10.0.0",
-        "winston": "^3.3.3"
+        "express": "^4.17.3",
+        "puppeteer-core": "^13.5.1",
+        "winston": "^3.6.0"
     },
     "repository": {
         "type": "git",

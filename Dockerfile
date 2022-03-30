@@ -1,9 +1,9 @@
-FROM alpine
+FROM alpine:3.15
 
 RUN apk add --no-cache chromium nodejs npm dumb-init
 
 COPY package*.json ./
-RUN PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install
+RUN npm install
 
 RUN mkdir /app
 COPY *.js /app
