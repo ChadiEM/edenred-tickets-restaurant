@@ -63,7 +63,8 @@ async function injectCookies(page) {
         fs.readFile(COOKIES_FILE, async (err, data) => {
             if (!err) {
                 let cookies = JSON.parse(data);
-                await page._client.send("Network.setCookies", { cookies: cookies });
+                const client = await page.target().createCDPSession();
+                await client.send("Network.setCookies", { cookies: cookies });
             }
             resolve();
         });
@@ -71,7 +72,8 @@ async function injectCookies(page) {
 }
 
 async function saveCookies(page) {
-    let cookies = await page._client.send("Network.getAllCookies", {});
+    const client = await page.target().createCDPSession();
+    let cookies = (await client.send("Network.getAllCookies"));
     return new Promise((resolve, reject) => {
         let data = JSON.stringify(cookies['cookies']);
         logger.info("Writing cookies.");
@@ -127,7 +129,7 @@ async function update() {
             await page.waitForSelector('div.carte-body > div.carte-body-left > span.carte-body_solde', { visible: true, timeout: 30000 });
             isLoggedIn = true
         } catch (err) {
-            logger.info('Cannot see card values right away. Probably need to login.')
+            logger.info('Cannot see card values right away.')
         }
 
         if (!isLoggedIn) {
@@ -143,7 +145,12 @@ async function update() {
             }
         }
 
-        await page.waitForSelector('div.carte-body > div.carte-body-left > span.carte-body_solde', { visible: true, timeout: 300000 });
+        try {
+            await page.waitForSelector('div.carte-body > div.carte-body-left > span.carte-body_solde', { visible: true, timeout: 300000 });
+        } catch (err) {
+            logger.info("Selector didn't show up. Skipping update.");
+            return;
+        }
 
         await saveCookies(page);
 
