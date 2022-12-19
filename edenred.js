@@ -156,8 +156,15 @@ async function update() {
 
         logger.info('Attempting to read data...');
 
-        const remaining = await page.$eval('div.carte-body > div.carte-body-right > span.carte-body_solde', el => el.innerText);
-        const today = await page.$eval('div.carte-body > div.carte-body-left > span.carte-body_solde', el => el.innerText);
+        let remaining = '--';
+        let today = '--';
+
+        while (remaining.includes('--') || today.includes('--')) {
+            remaining = await page.$eval('div.carte-body > div.carte-body-right > span.carte-body_solde', el => el.innerText);
+            today = await page.$eval('div.carte-body > div.carte-body-left > span.carte-body_solde', el => el.innerText);
+        }
+
+        logger.info(`Remaining = ${remaining}, Today = ${today}`);
 
         trValues['total'] = parseFloat(remaining.split(' ')[0]);
         trValues['today'] = parseFloat(today.split(' ')[0]);
