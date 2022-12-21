@@ -37,7 +37,7 @@ let trValues = {
 };
 
 app.get("/tr", (_req, res) => {
-    if (trValues["lastUpdated"] == 0) {
+    if (trValues["lastUpdated"] === 0) {
         res.sendStatus(404);
     } else {
         res.status(200).json(trValues);
@@ -68,7 +68,7 @@ async function injectCookies(page) {
         logger.info("Reading existing cookies.");
         fs.readFile(COOKIES_FILE, async (err, data) => {
             if (!err) {
-                let cookies = JSON.parse(data);
+                let cookies = JSON.parse(data.toString("utf8"));
                 const client = await page.target().createCDPSession();
                 await client.send("Network.setCookies", { cookies: cookies });
             }
