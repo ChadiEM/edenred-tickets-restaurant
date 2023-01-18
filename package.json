@@ -3,13 +3,21 @@
     "description": "Edenred Tickets Restaurants",
     "version": "1.0.1",
     "devDependencies": {
+        "@rollup/plugin-commonjs": "^24.0.0",
+        "@rollup/plugin-json": "^6.0.0",
+        "@rollup/plugin-node-resolve": "^15.0.1",
+        "@rollup/plugin-terser": "^0.2.0",
         "eslint": "^8.30.0",
-        "prettier": "^2.8.1"
+        "prettier": "^2.8.1",
+        "rollup": "^3.7.5"
     },
     "dependencies": {
         "express": "^4.17.3",
         "puppeteer-core": "^19.4.1",
         "winston": "^3.6.0"
+    },
+    "scripts": {
+        "build": "rollup -c rollup.config.js"
     },
     "repository": {
         "type": "git",
