@@ -1,6 +1,6 @@
 FROM alpine:3.17
 
-RUN apk --no-cache upgrade && apk add --no-cache chromium=~108 nodejs npm dumb-init
+RUN apk --no-cache upgrade && apk add --no-cache chromium=~109 nodejs npm dumb-init
 
 COPY package*.json ./
 RUN npm install --omit=dev && npm cache clean --force
