@@ -53,13 +53,16 @@ app.get("/health", (_req, res) => {
     res.status(200).json(healthcheck);
 });
 
-update();
+(function loop() {
+    setTimeout(async () => {
+        await update();
+        loop();
+    }, UDPATE_INTERVAL);
+})();
 
-const updater = setInterval(() => update(), UDPATE_INTERVAL);
 const server = app.listen(PORT);
 
 process.on("SIGINT", () => {
-    clearInterval(updater);
     server.close();
 });
 
